@@ -9,6 +9,7 @@ import streamlit as st
 
 # Unduh dataset twitter_samples dari NLTK
 nltk.download('twitter_samples')
+nltk.download('punkt')
 
 # Fungsi untuk mengekstrak fitur dari teks komentar
 def extract_features(words):
