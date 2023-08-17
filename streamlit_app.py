@@ -9,7 +9,6 @@ import streamlit as st
 
 # Unduh dataset twitter_samples dari NLTK
 nltk.download('twitter_samples')
-nltk.download('punkt')
 
 # Fungsi untuk mengekstrak fitur dari teks komentar
 def extract_features(words):
@@ -28,7 +27,7 @@ import random
 random.shuffle(dataset)
 
 # Mengambil daftar berisi semua kata dari seluruh tweet
-all_words = [word.lower() for tweet, _ in dataset for word in english.pickle(tweet)]
+all_words = [word.lower() for tweet, _ in dataset for word in tweet.split()]
 
 # Mengambil 2000 kata unik yang paling umum
 all_words = nltk.FreqDist(all_words)
