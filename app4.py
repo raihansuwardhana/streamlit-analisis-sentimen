@@ -27,7 +27,7 @@ import random
 random.shuffle(dataset)
 
 # Mengambil daftar berisi semua kata dari seluruh tweet
-all_words = [word.lower() for tweet, _ in dataset for word in word_tokenize(tweet)]
+all_words = [word.lower() for tweet, _ in dataset for word in english.pickle(tweet)]
 
 # Mengambil 2000 kata unik yang paling umum
 all_words = nltk.FreqDist(all_words)
