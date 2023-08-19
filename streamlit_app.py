@@ -7,18 +7,20 @@ import re
 import string
 import streamlit as st
 
-# Unduh dataset twitter_samples dari NLTK
-nltk.download('twitter_samples')
-nltk.download('stopwords')
+# Mendapatkan path dari direktori tempat file program berada
+program_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Fungsi untuk mengekstrak fitur dari teks komentar
 def extract_features(words):
     return dict([(word, True) for word in words])
 
-# Mengambil dataset twitter_samples
-from nltk.corpus import twitter_samples
-positive_tweets = twitter_samples.strings('positive_tweets.json')
-negative_tweets = twitter_samples.strings('negative_tweets.json')
+# Path untuk dataset positif dan negatif
+positive_dataset_path = os.path.join(program_directory, 'positive_tweets.json')
+negative_dataset_path = os.path.join(program_directory, 'negative_tweets.json')
+
+# Mendapatkan teks dari dataset
+positive_tweets = nltk.corpus.twitter_samples.strings(positive_dataset_path)
+negative_tweets = nltk.corpus.twitter_samples.strings(negative_dataset_path)
 
 # Menggabungkan dataset positif dan negatif
 dataset = [(tweet, 'Sentimen Positif') for tweet in positive_tweets] + [(tweet, 'Sentimen Negatif') for tweet in negative_tweets]
@@ -28,7 +30,7 @@ import random
 random.shuffle(dataset)
 
 # Mengambil daftar berisi semua kata dari seluruh tweet
-all_words = [word.lower() for tweet, _ in dataset for word in tweet.split()]
+all_words = [word.lower() for tweet, _ in dataset for word in word_tokenize(tweet)]
 
 # Mengambil 2000 kata unik yang paling umum
 all_words = nltk.FreqDist(all_words)
@@ -79,7 +81,7 @@ if st.button("Analysis "):
         cleaned_input = cleaned_input.lower()
 
         # Langkah 3: Tokenisasi
-        sample_words =  cleaned_input.split()
+        sample_words =  word_tokenize(cleaned_input)
 
         # Langkah 4: Menghapus stop words
         sample_words = [word for word in sample_words if word not in stop_words]
