@@ -13,6 +13,11 @@ nltk.download('punkt')
 # Download necessary NLTK resource
 nltk.download('twitter_samples')
 
+nltk.download('stopwords')
+
+# Explicitly set NLTK data path for Streamlit Share
+nltk.data.path.append('/app/nltk_data')
+
 # Fungsi untuk mengekstrak fitur dari teks komentar
 def extract_features(words):
     return dict([(word, True) for word in words])
