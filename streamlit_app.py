@@ -88,7 +88,7 @@ if st.button("Analysis "):
         cleaned_input = cleaned_input.lower()
 
         # Langkah 3: Tokenisasi
-     sample_words =  word_tokenize(cleaned_input)
+        sample_words =  word_tokenize(cleaned_input)
 
         # Langkah 4: Menghapus stop words
         sample_words = [word for word in sample_words if word not in stop_words]
