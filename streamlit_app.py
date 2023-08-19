@@ -7,6 +7,9 @@ import re
 import string
 import streamlit as st
 
+# Set NLTK data path explicitly for Streamlit Share
+nltk.data.path.append('/app/nltk_data')
+
 # Download necessary NLTK resource
 nltk.download('twitter_samples')
 nltk.download('punkt')
