@@ -7,6 +7,13 @@ import re
 import string
 import streamlit as st
 
+# Download necessary NLTK resource
+nltk.download('punkt')
+
+nltk.download('twitter_samples')
+
+nltk.stopwords('stopwords')
+
 # Mendapatkan path dari direktori tempat file program berada
 program_directory = os.path.dirname(os.path.abspath(__file__))
 
