@@ -11,8 +11,10 @@ import streamlit as st
 nltk.data.path.append('/app/nltk_data')
 
 # Download necessary NLTK resource
-nltk.download('twitter_samples')
 nltk.download('punkt')
+
+# Download necessary NLTK resource
+nltk.download('twitter_samples')
 
 # Fungsi untuk mengekstrak fitur dari teks komentar
 def extract_features(words):
@@ -26,15 +28,12 @@ negative_tweets = twitter_samples.strings('negative_tweets.json')
 # Menggabungkan dataset positif dan negatif
 dataset = [(tweet, 'Sentimen Positif') for tweet in positive_tweets] + [(tweet, 'Sentimen Negatif') for tweet in negative_tweets]
 
-# Menggabungkan dataset positif dan negatif
-dataset = [(tweet, 'Sentimen Positif') for tweet in positive_tweets] + [(tweet, 'Sentimen Negatif') for tweet in negative_tweets]
-
 # Mengacak urutan dataset
 import random
 random.shuffle(dataset)
 
 # Mengambil daftar berisi semua kata dari seluruh tweet
-all_words = [word.lower() for tweet, _ in dataset for word in tweet.split()]
+all_words = [word.lower() for tweet, _ in dataset for word in word_tokenize(tweet)]
 
 # Mengambil 2000 kata unik yang paling umum
 all_words = nltk.FreqDist(all_words)
